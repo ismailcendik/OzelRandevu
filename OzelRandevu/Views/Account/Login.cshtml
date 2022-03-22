@@ -1,0 +1,45 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1 class="text-center">Özel Randevu Sistemi</h1>
+
+
+<div class="row">
+
+    <div class="col-md-4">
+
+
+    </div>
+
+    <div class="col-md-4">
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="KullaniciAdi" class="form-label"></label>
+                <span class="text-danger" asp-validation-for="KullaniciAdi"></span>
+                <input asp-for="KullaniciAdi" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Sifre" class="form-label"></label>
+                <span class="text-danger" asp-validation-for="Sifre"></span>
+                <input asp-for="Sifre" class="form-control">
+            </div>
+
+            <div class="mb-3 form-check">
+                <input asp-for="RememberMe" type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" asp-for="RememberMe">Beni Hatırla</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Giriş Yap</button>
+        </form>
+
+    </div>
+
+    <div class="col-md-4">
+
+
+    </div>
+
+</div>

@@ -1,0 +1,226 @@
+﻿@model SekreterViewModel
+@{
+    ViewData["Title"] = "Sekreter";
+}
+
+@section Styles{
+
+    <link href="~/lib/fullcalendar/core/main.css" rel="stylesheet" />
+    <link href="~/lib/fullcalendar/daygrid/main.css" rel="stylesheet" />
+    <link href="~/lib/fullcalendar/timegrid/main.css" rel="stylesheet" />
+    <link href="~/lib/fullcalendar/list/main.css" rel="stylesheet" />
+    <link href="~/lib/fullcalendar/bootstrap/main.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+}
+
+<div id='top'>
+
+    Locales:
+    <select id='locale-selector'></select>
+</div>
+<br />
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">x Devlet Hastanesi</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@Model.Kullanicilar.Ad @Model.Kullanicilar.Soyad</h6>
+                <p class="card-text">X hastanesi özel randevu sistemi</p>
+                <a href="/Account/Logout" class="card-link">Çıkış Yap</a>
+                @*<a href="#" class="card-link">Another link</a>*@
+            </div>
+        </div>
+        <br />
+
+        <ul class="list-group">
+            <li class="list-group-item">Dr.İsmail ÇENDİK <button class="btn btn-sm mt-2 pull-right" style="background-color:red"></button></li>
+            <li class="list-group-item">Dr.Yılmaz VURAL <button class="btn btn-sm mt-2 pull-right" style="background-color:yellow"></button></li>
+            @*<li class="list-group-item">A third item</li>
+                <li class="list-group-item">A fourth item</li>
+                <li class="list-group-item">And a fifth one</li>*@
+        </ul>
+
+    </div>
+
+    <div class="col-md-9">
+        <div class="card" style="width:130%">
+
+            <div class="card-body">
+                <div id="calendar">
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+    <script src="~/lib/fullcalendar/core/main.js"></script>
+    <script src="~/lib/fullcalendar/daygrid/main.js"></script>
+    <script src="~/lib/fullcalendar/timegrid/main.js"></script>
+    <script src="~/lib/fullcalendar/list/main.js"></script>
+    <script src="~/lib/fullcalendar/interaction/main.js"></script>
+    <script src="~/lib/fullcalendar/core/locales-all.js"></script>
+    @*<script src="~/lib/fullcalendar/core/locales/en-gb.js"></script>
+    <script src="~/lib/fullcalendar/core/locales/tr.js"></script>*@  @*lokasyon ayarı*@
+    <script src="~/lib/fullcalendar/bootstrap/main.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var initialLocaleCode = 'tr';
+            var localeSelectorEl = document.getElementById('locale-selector');
+            var calendarEl = document.getElementById('calendar');
+
+
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+               
+                plugins: ['interaction', 'dayGrid', 'timeGrid', 'list', 'bootstrap'],
+                themeSystem: 'bootstrap',
+                bootstrapFontAwesome: {
+                    dayGridMonth: 'calendar',
+                    prev: 'chevron-circle-left',
+                    next: 'chevron-circle-right',
+                    listWeek: 'list'
+
+                },
+                //locale: 'en-gb',
+                locale: initialLocaleCode,
+                header: {
+                    left: 'prev, next, multilanguage ',
+                    center: 'title',
+                    right: 'today, timeGridDay, timeGridFiveDay, timeGridWeek, dayGridMonth, listWeek'
+                    //listDay,listWeek,listMonth,listYear
+                },
+
+                footer: {
+                    left: 'prevYear',
+                    right: 'nextYear'
+                },
+                minTime: '08:00:00',
+                maxTime: '16:45:00',
+
+                slotDuration: '00:15:00',
+                slotLabelInterval: '00:15:00',
+                slotLabelFormat: {
+                    hour: 'numeric',
+                    minute: '2-digit'
+
+                    //meridiem:'short' pm / am format locales en-gb
+                },
+
+                /*showNonCurrentDates: false;*/   /*saydam gelen oncekı ayın gunlerını silme*/
+                /*fixedWeekCount:false,*/
+                /*handleWindowResize : true,*/
+                contentHeight: 600,
+
+                defaultView: 'dayGridMonth',
+                weekends: true,/*haftasonu ayarlaması*/
+                allDaySlot: false,
+                firstDay: 1, //pazardan başlayacak sekılde 0,1,2
+                titleFormat: {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                },
+                /*  titleRangeSeparator:'/'  tarıhdekı ayrac kısmı */
+                columnHeaderFormat: {
+                    /*   month: 'numeric',*/
+                    weekday: 'long',
+                    /*    day:'numeric'*/
+                },
+
+                views: {
+                    //timeGridFiveDay: {
+                    //    type: 'timeGrid',
+                    //    dayCount: 5,
+                    //    buttonText:'5 Gün'
+                    //}
+
+                },
+
+               
+                eventBackgroundColor: '#1E90FF',
+                eventBorderColor: 'red',
+                eventTextColor: 'white',
+                eventTimeFormat: {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                },
+
+                editable: true,
+
+                /* eventOrder :'title',//start, duration,allDay vs seklınde event sıralamaları*/
+                timeZone: 'UTC',
+                events: [
+
+                    {
+
+                        id: 'x',
+                        title: 'Örnek Randevu',
+                        start: '2022-02-17T08:00:00.000Z',
+                        end: '2022-02-17T08:30:00.000Z'
+
+                    },
+
+                    {
+
+                        id: 'y',
+                        title: 'Özel Randevu',
+                        start: '2022-02-17T10:10:00.000Z',
+                        end: '2022-02-17T11:40:00.000Z'
+
+                    }
+
+
+
+                ],
+
+                selectable: true,
+                select: function (selectionInfo) {
+
+                    console.log(selectionInfo);
+
+                }
+                //buttonText: {
+
+                //    today: 'Bugün',
+                //    month: 'Aylık liste',
+                //    week: 'Haftalık Liste',
+                //    day:'Günlük Liste'
+
+                //}
+
+
+            });
+
+            calendar.render();
+
+            calendar.getAvailableLocaleCodes().forEach(function (localeCode) {
+                var optionEl = document.createElement('option');
+                optionEl.value = localeCode;
+                optionEl.selected = localeCode == initialLocaleCode;
+                optionEl.innerText = localeCode;
+                localeSelectorEl.appendChild(optionEl);
+            });
+
+            localeSelectorEl.addEventListener('change', function () {
+                if (this.value) {
+                    calendar.setOption('locale', this.value);
+                }
+            });
+
+
+
+        });
+
+    </script>
+
+}

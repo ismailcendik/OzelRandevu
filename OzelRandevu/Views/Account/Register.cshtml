@@ -1,0 +1,71 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1 class="text-center">Özel Randevu Sistemi</h1>
+
+<div class="row">
+
+    <div class="col-md-4">
+
+
+    </div>
+
+    <div class="col-md-4">
+        <form asp-action="Register">
+            <div class="mb-3">
+                <label asp-for="KullaniciAdi" class="form-label"></label>
+                <span class="text-danger" asp-validation-for="KullaniciAdi"></span>
+                <input asp-for="KullaniciAdi" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label asp-for="Ad" class="form-label"></label>
+                <span class="text-danger" asp-validation-for="Ad"></span>
+                <input asp-for="Ad" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label asp-for="Soyad" class="form-label"></label>
+                <span class="text-danger" asp-validation-for="Soyad"></span>
+                <input asp-for="Soyad" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <span class="text-danger" asp-validation-for="Email"></span>
+                <input asp-for="Email" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Renk" class="form-label"></label>
+                <span class="text-danger" asp-validation-for="Renk"></span>
+                <input asp-for="Renk" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Sifre" class="form-label"></label>
+                <span class="text-danger" asp-validation-for="Sifre"></span>
+                <input asp-for="Sifre" class="form-control">
+            </div>
+
+            <div class="mb-3 form-check">
+                <input asp-for="Doktor" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" asp-for="Doktor">Doktor</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </form>
+
+    </div>
+
+    <div class="col-md-4">
+
+
+    </div>
+
+</div>
+
+
+ 
+
+
+@*62*@
