@@ -32,7 +32,7 @@ namespace OzelRandevu.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Lütfen randevu rengini belirtiniz.")]
+        //[Required(ErrorMessage = "Lütfen randevu rengini belirtiniz.")]
         [Display(Name = "Randevu Rengi:")]
         public string Renk { get; set; }
 
