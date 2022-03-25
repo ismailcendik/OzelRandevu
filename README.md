@@ -1,0 +1,2 @@
+# OzelRandevu
+.Net Core ,PostgreSql 
