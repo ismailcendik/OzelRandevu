@@ -34,7 +34,12 @@
         <br />
 
         <ul class="list-group">
-            <li class="list-group-item">Dr.İsmail ÇENDİK <button class="btn btn-sm mt-2 pull-right" style="background-color:red"></button></li>
+            @foreach (var item in Model.Doktor)
+            {
+                <li class="list-group-item">Dr. @item.Ad @item.Soyad <button class="btn btn-sm mt-2 pull-right" style="background-color:@item.Renk"></button></li>
+
+            }
+            
             <li class="list-group-item">Dr.Yılmaz VURAL <button class="btn btn-sm mt-2 pull-right" style="background-color:yellow"></button></li>
             @*<li class="list-group-item">A third item</li>
                 <li class="list-group-item">A fourth item</li>
@@ -123,6 +128,7 @@
 
                 defaultView: 'dayGridMonth',
                 weekends: true,/*haftasonu ayarlaması*/
+               /* hiddenDays:[0],*//*Gızlenecek gunler 0 pazardan baslayacak sekılde ıhtıyac halınde kullanıalbılır*/
                 allDaySlot: false,
                 firstDay: 1, //pazardan başlayacak sekılde 0,1,2
                 titleFormat: {
@@ -161,23 +167,23 @@
                 timeZone: 'UTC',
                 events: [
 
-                    {
+                    //{
 
-                        id: 'x',
-                        title: 'Örnek Randevu',
-                        start: '2022-02-17T08:00:00.000Z',
-                        end: '2022-02-17T08:30:00.000Z'
+                    //    id: 'x',
+                    //    title: 'Örnek Randevu',
+                    //    start: '2022-02-17T08:00:00.000Z',
+                    //    end: '2022-02-17T08:30:00.000Z'
 
-                    },
+                    //},
 
-                    {
+                    //{
 
-                        id: 'y',
-                        title: 'Özel Randevu',
-                        start: '2022-02-17T10:10:00.000Z',
-                        end: '2022-02-17T11:40:00.000Z'
+                    //    id: 'y',
+                    //    title: 'Özel Randevu',
+                    //    start: '2022-02-17T10:10:00.000Z',
+                    //    end: '2022-02-17T11:40:00.000Z'
 
-                    }
+                    //}
 
 
 
