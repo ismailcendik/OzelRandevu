@@ -1,4 +1,5 @@
-﻿using OzelRandevu.Data.Entity;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using OzelRandevu.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace OzelRandevu.Models
     {
         public  Ozel_Randevu_Kullanicilar Kullanicilar { get; set; }
         public IEnumerable<Ozel_Randevu_Kullanicilar> Doktor { get; set; }
+        public List<SelectListItem> DoktorSelectList { get; internal set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using OzelRandevu.Data.Entity;
 using OzelRandevu.Models;
 using System;
@@ -29,10 +30,18 @@ namespace OzelRandevu.Controllers
 
             if (_userManager.IsInRoleAsync(kullanicilar,"Sekreter").Result)
             {
+                var doktor = _userManager.Users.Where(x => x.Doktor);
                 SekreterViewModel model = new SekreterViewModel()
                 {
+
                     Kullanicilar = kullanicilar,
-                    Doktor = _userManager.Users.Where(x => x.Doktor)
+                    Doktor = doktor,
+                    DoktorSelectList = doktor.Select(n => new SelectListItem {
+
+                        Value = n.Id,
+                        Text = $"Dt. {n.Ad} {n.Soyad}"
+
+                    }).ToList()
 
                 };
                 return View("Sekreter",model);
