@@ -14,219 +14,252 @@
 }
 
 <div id='top'>
-
-    Locales:
-    <select id='locale-selector'></select>
-</div>
-<br />
-
-<div class="row">
-    <div class="col-md-3">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">x Devlet Hastanesi</h5>
-                <h6 class="card-subtitle mb-2 text-muted">@Model.Kullanicilar.Ad @Model.Kullanicilar.Soyad</h6>
-                <p class="card-text">X hastanesi özel randevu sistemi</p>
-                <a href="/Account/Logout" class="card-link">Çıkış Yap</a>
-                @*<a href="#" class="card-link">Another link</a>*@
-            </div>
-        </div>
-        <br />
-
-        <ul class="list-group">
-            @foreach (var item in Model.Doktor)
-            {
-                <li class="list-group-item">Dr. @item.Ad @item.Soyad <button class="btn btn-sm mt-2 pull-right" style="background-color:@item.Renk"></button></li>
-
-            }
-            
-            <li class="list-group-item">Dr.Yılmaz VURAL <button class="btn btn-sm mt-2 pull-right" style="background-color:yellow"></button></li>
-            @*<li class="list-group-item">A third item</li>
-                <li class="list-group-item">A fourth item</li>
-                <li class="list-group-item">And a fifth one</li>*@
-        </ul>
-
+    <div style='float:left'>
+        Lokasyon:
+        <select id='locale-selector'></select>
+        Saat Dilimi:
+        <select id='time-zone-selector'>
+            <option value='Europe/Istanbul' selected>Europe/Istanbul</option>
+        </select>
+        
     </div>
+    </div>
+    <br /><br />
 
-    <div class="col-md-9">
-        <div class="card" style="width:130%">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">x Devlet Hastanesi</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@Model.Kullanicilar.Ad @Model.Kullanicilar.Soyad</h6>
+                    <p class="card-text">X hastanesi özel randevu sistemi</p>
+                    <a href="/Account/Logout" class="card-link">Çıkış Yap</a>
+                    @*<a href="#" class="card-link">Another link</a>*@
+                </div>
+            </div>
+            <br />
 
-            <div class="card-body">
-                <div id="calendar">
+            <ul class="list-group">
+                @foreach (var item in Model.Doktor)
+                {
+                    <li class="list-group-item">Dr. @item.Ad @item.Soyad <button class="btn btn-sm mt-2 pull-right" style="background-color:@item.Renk"></button></li>
 
+                }
+
+                <li class="list-group-item">Dr.Yılmaz VURAL <button class="btn btn-sm mt-2 pull-right" style="background-color:yellow"></button></li>
+                @*<li class="list-group-item">A third item</li>
+                    <li class="list-group-item">A fourth item</li>
+                    <li class="list-group-item">And a fifth one</li>*@
+            </ul>
+
+        </div>
+
+        <div class="col-md-9">
+            <div class="card" style="width:130%">
+
+                <div class="card-body">
+                    <div id="calendar">
+
+
+                    </div>
 
                 </div>
-
             </div>
-        </div>
 
+
+        </div>
 
     </div>
 
-</div>
 
+    @section Scripts {
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.28/moment-timezone-with-data-10-year-range.js"></script>
+        <script src="~/lib/fullcalendar/core/main.js"></script>
+        <script src="~/lib/fullcalendar/moment/main.js"></script>
+        <script src="~/lib/fullcalendar/moment-timezone/main.js"></script>
+        <script src="~/lib/fullcalendar/daygrid/main.js"></script>
+        <script src="~/lib/fullcalendar/timegrid/main.js"></script>
+        <script src="~/lib/fullcalendar/list/main.js"></script>
+        <script src="~/lib/fullcalendar/interaction/main.js"></script>
+        <script src="~/lib/fullcalendar/core/locales-all.js"></script>
+        @*<script src="~/lib/fullcalendar/core/locales/en-gb.js"></script>
+            <script src="~/lib/fullcalendar/core/locales/tr.js"></script>*@  @*lokasyon ayarı*@
+            <script src="~/lib/fullcalendar/bootstrap/main.js"></script>
 
-@section Scripts {
-    <script src="~/lib/fullcalendar/core/main.js"></script>
-    <script src="~/lib/fullcalendar/daygrid/main.js"></script>
-    <script src="~/lib/fullcalendar/timegrid/main.js"></script>
-    <script src="~/lib/fullcalendar/list/main.js"></script>
-    <script src="~/lib/fullcalendar/interaction/main.js"></script>
-    <script src="~/lib/fullcalendar/core/locales-all.js"></script>
-    @*<script src="~/lib/fullcalendar/core/locales/en-gb.js"></script>
-    <script src="~/lib/fullcalendar/core/locales/tr.js"></script>*@  @*lokasyon ayarı*@
-    <script src="~/lib/fullcalendar/bootstrap/main.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var initialLocaleCode = 'tr';
-            var localeSelectorEl = document.getElementById('locale-selector');
-            var calendarEl = document.getElementById('calendar');
-
-
-
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-               
-                plugins: ['interaction', 'dayGrid', 'timeGrid', 'list', 'bootstrap'],
-                themeSystem: 'bootstrap',
-                bootstrapFontAwesome: {
-                    dayGridMonth: 'calendar',
-                    prev: 'chevron-circle-left',
-                    next: 'chevron-circle-right',
-                    listWeek: 'list'
-
-                },
-                //locale: 'en-gb',
-                locale: initialLocaleCode,
-                header: {
-                    left: 'prev, next, multilanguage ',
-                    center: 'title',
-                    right: 'today, timeGridDay, timeGridFiveDay, timeGridWeek, dayGridMonth, listWeek'
-                    //listDay,listWeek,listMonth,listYear
-                },
-
-                footer: {
-                    left: 'prevYear',
-                    right: 'nextYear'
-                },
-                minTime: '08:00:00',
-                maxTime: '16:45:00',
-
-                slotDuration: '00:15:00',
-                slotLabelInterval: '00:15:00',
-                slotLabelFormat: {
-                    hour: 'numeric',
-                    minute: '2-digit'
-
-                    //meridiem:'short' pm / am format locales en-gb
-                },
-
-                /*showNonCurrentDates: false;*/   /*saydam gelen oncekı ayın gunlerını silme*/
-                /*fixedWeekCount:false,*/
-                /*handleWindowResize : true,*/
-                contentHeight: 600,
-
-                defaultView: 'dayGridMonth',
-                weekends: true,/*haftasonu ayarlaması*/
-               /* hiddenDays:[0],*//*Gızlenecek gunler 0 pazardan baslayacak sekılde ıhtıyac halınde kullanıalbılır*/
-                allDaySlot: false,
-                firstDay: 1, //pazardan başlayacak sekılde 0,1,2
-                titleFormat: {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                },
-                /*  titleRangeSeparator:'/'  tarıhdekı ayrac kısmı */
-                columnHeaderFormat: {
-                    /*   month: 'numeric',*/
-                    weekday: 'long',
-                    /*    day:'numeric'*/
-                },
-
-                views: {
-                    //timeGridFiveDay: {
-                    //    type: 'timeGrid',
-                    //    dayCount: 5,
-                    //    buttonText:'5 Gün'
-                    //}
-
-                },
-
-               
-                eventBackgroundColor: '#1E90FF',
-                eventBorderColor: 'red',
-                eventTextColor: 'white',
-                eventTimeFormat: {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                },
-
-                editable: true,
-
-                /* eventOrder :'title',//start, duration,allDay vs seklınde event sıralamaları*/
-                timeZone: 'UTC',
-                events: [
-
-                    //{
-
-                    //    id: 'x',
-                    //    title: 'Örnek Randevu',
-                    //    start: '2022-02-17T08:00:00.000Z',
-                    //    end: '2022-02-17T08:30:00.000Z'
-
-                    //},
-
-                    //{
-
-                    //    id: 'y',
-                    //    title: 'Özel Randevu',
-                    //    start: '2022-02-17T10:10:00.000Z',
-                    //    end: '2022-02-17T11:40:00.000Z'
-
-                    //}
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var initialTimeZone = 'Europe/Istanbul';
+                    var timeZoneSelectorEl = document.getElementById('time-zone-selector');
+                    var initialLocaleCode = 'tr';
+                    var localeSelectorEl = document.getElementById('locale-selector');
+                    var calendarEl = document.getElementById('calendar');
 
 
 
-                ],
+                    var calendar = new FullCalendar.Calendar(calendarEl, {
 
-                selectable: true,
-                select: function (selectionInfo) {
+                        timeZone: initialTimeZone,
+                        plugins: ['interaction', 'dayGrid', 'timeGrid', 'list', 'bootstrap','momentTimezone'],
+                        themeSystem: 'bootstrap',
+                        bootstrapFontAwesome: {
+                            dayGridMonth: 'calendar',
+                            prev: 'chevron-circle-left',
+                            next: 'chevron-circle-right',
+                            listWeek: 'list'
 
-                    console.log(selectionInfo);
+                        },
+                        //locale: 'en-gb',
+                        locale: initialLocaleCode,
+                        header: {
+                            left: 'prev, next, multilanguage ',
+                            center: 'title',
+                            right: 'today, timeGridDay, timeGridFiveDay, timeGridWeek, dayGridMonth, listWeek'
+                            //listDay,listWeek,listMonth,listYear
+                        },
 
-                }
-                //buttonText: {
+                        footer: {
+                            left: 'prevYear',
+                            right: 'nextYear'
+                        },
+                        minTime: '08:00:00',
+                        maxTime: '16:45:00',
 
-                //    today: 'Bugün',
-                //    month: 'Aylık liste',
-                //    week: 'Haftalık Liste',
-                //    day:'Günlük Liste'
+                        slotDuration: '00:15:00',
+                        slotLabelInterval: '00:15:00',
+                        slotLabelFormat: {
+                            hour: 'numeric',
+                            minute: '2-digit'
 
-                //}
+                            //meridiem:'short' pm / am format locales en-gb
+                        },
+
+                        /*showNonCurrentDates: false;*/   /*saydam gelen oncekı ayın gunlerını silme*/
+                        /*fixedWeekCount:false,*/
+                        /*handleWindowResize : true,*/
+                        contentHeight: 600,
+
+                        defaultView: 'dayGridMonth',
+                        weekends: true,/*haftasonu ayarlaması*/
+                        /* hiddenDays:[0],*//*Gızlenecek gunler 0 pazardan baslayacak sekılde ıhtıyac halınde kullanıalbılır*/
+                        allDaySlot: false,
+                        firstDay: 1, //pazardan başlayacak sekılde 0,1,2
+                        titleFormat: {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        },
+                        /*  titleRangeSeparator:'/'  tarıhdekı ayrac kısmı */
+                        columnHeaderFormat: {
+                            /*   month: 'numeric',*/
+                            weekday: 'long',
+                            /*    day:'numeric'*/
+                        },
+
+                        views: {
+                            //timeGridFiveDay: {
+                            //    type: 'timeGrid',
+                            //    dayCount: 5,
+                            //    buttonText:'5 Gün'
+                            //}
+
+                        },
 
 
-            });
+                        eventBackgroundColor: '#1E90FF',
+                        eventBorderColor: 'red',
+                        eventTextColor: 'white',
+                        eventTimeFormat: {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                        },
 
-            calendar.render();
+                        editable: true,
 
-            calendar.getAvailableLocaleCodes().forEach(function (localeCode) {
-                var optionEl = document.createElement('option');
-                optionEl.value = localeCode;
-                optionEl.selected = localeCode == initialLocaleCode;
-                optionEl.innerText = localeCode;
-                localeSelectorEl.appendChild(optionEl);
-            });
+                        /* eventOrder :'title',//start, duration,allDay vs seklınde event sıralamaları*/
 
-            localeSelectorEl.addEventListener('change', function () {
-                if (this.value) {
-                    calendar.setOption('locale', this.value);
-                }
-            });
+                        events: [
+
+                            //{
+
+                            //    id: 'x',
+                            //    title: 'Örnek Randevu',
+                            //    start: '2022-02-17T08:00:00.000Z',
+                            //    end: '2022-02-17T08:30:00.000Z'
+
+                            //},
+
+                            //{
+
+                            //    id: 'y',
+                            //    title: 'Özel Randevu',
+                            //    start: '2022-02-17T10:10:00.000Z',
+                            //    end: '2022-02-17T11:40:00.000Z'
+
+                            //}
 
 
 
-        });
+                        ],
 
-    </script>
+                        selectable: true,
+                        select: function (selectionInfo) {
 
-}
+                            console.log(selectionInfo);
+
+                        }
+                        //buttonText: {
+
+                        //    today: 'Bugün',
+                        //    month: 'Aylık liste',
+                        //    week: 'Haftalık Liste',
+                        //    day:'Günlük Liste'
+
+                        //}
+
+
+                    });
+
+                    calendar.render();
+
+                    calendar.getAvailableLocaleCodes().forEach(function (localeCode) {
+                        var optionEl = document.createElement('option');
+                        optionEl.value = localeCode;
+                        optionEl.selected = localeCode == initialLocaleCode;
+                        optionEl.innerText = localeCode;
+                        localeSelectorEl.appendChild(optionEl);
+                    });
+
+                    localeSelectorEl.addEventListener('change', function () {
+                        if (this.value) {
+                            calendar.setOption('locale', this.value);
+                        }
+                    });
+
+                    FullCalendar.requestJson('GET', 'https://fullcalendar.io/api/demo-feeds/timezones.json', {}, function (timeZones) {
+                        timeZones.forEach(function (timeZone) {
+                            var optionEl;
+
+                            if (timeZone !== 'Europe/Istanbul') {
+                                optionEl = document.createElement('option');
+                                optionEl.value = timeZone;
+                                optionEl.innerText = timeZone;
+                                timeZoneSelectorEl.appendChild(optionEl);
+                            }
+                        });
+                    }, function () {
+                        // failure
+                    });
+
+                    // Saat dilimi değiştiğinde takvimi değiştir 01.04 İsmail
+                    timeZoneSelectorEl.addEventListener('change', function () {
+                        calendar.setOption('timeZone', this.value);
+                    });
+
+
+
+                });
+
+            </script>
+
+    }
