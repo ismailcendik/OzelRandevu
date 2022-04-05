@@ -11,6 +11,7 @@
     <link href="~/lib/fullcalendar/list/main.css" rel="stylesheet" />
     <link href="~/lib/fullcalendar/bootstrap/main.css" rel="stylesheet" />
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 }
 
 <!-- Modal -->
@@ -28,12 +29,22 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label class="form-control-label">Başlangıç Tarihi :</label>
-                            <input id="inputBaslangicTarihi" type="text" class="form-control" />
+                            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                <input id="inputBaslangicTarihi" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" />
+                                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
 
                         </div>
                         <div class="form-group col-md-6">
                             <label class="form-control-label">Bitiş Tarihi :</label>
-                            <input id="inputBitisTarihi" type="text" class="form-control" />
+                            <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                                <input id="inputBitisTarihi" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" />
+                                <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
 
                         </div>
 
@@ -157,6 +168,7 @@
     @*<script src="~/lib/fullcalendar/core/locales/en-gb.js"></script>
         <script src="~/lib/fullcalendar/core/locales/tr.js"></script>*@  @*lokasyon ayarı*@
         <script src="~/lib/fullcalendar/bootstrap/main.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
@@ -280,8 +292,8 @@
                         console.log(selectionInfo);
                         selectedEvent = {
                             id: 0,
-                            baslangic: selectionInfo.start,
-                            bitis: selectionInfo.end,
+                            baslangic: moment(selectionInfo.start),
+                            bitis: moment(selectionInfo.end),
                             HastaAdi: "",
                             HastaSoyadi: "",
                             Aciklama: "",
@@ -306,11 +318,19 @@
 
                 calendar.render();
 
+                $('#datetimepicker1', '#datetimepicker2').datetimepicker({
+                    format :'DD/MM/YYYY HH:mm'
+
+
+
+                });
+                
+
                 function openEkleGuncelleModal() {
 
                     if (selectedEvent != null) {
-                        $('#inputBaslangicTarihi').val(selectedEvent.baslangic);
-                        $('#inputBitisTarihi').val(selectedEvent.bitis);
+                        $('#inputBaslangicTarihi').val(selectedEvent.baslangic.format('DD/MM/YYYY HH:mm'));
+                        $('#inputBitisTarihi').val(selectedEvent.bitis.format('DD/MM/YYYY HH:mm'));
                         $('#inputHastaAdi').val(selectedEvent.HastaAdi);
                         $('#inputHastaSoyadi').val(selectedEvent.HastaSoyadi);
                         $('#inputAciklama').val(selectedEvent.Aciklama);
