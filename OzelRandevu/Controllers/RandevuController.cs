@@ -57,7 +57,6 @@ namespace OzelRandevu.Controllers
         }
 
         [HttpPost]
-
         public JsonResult RandevuEkleGuncelle(RandevuEkleGuncelleModel model)
         {
             //Basit validasyon   31.03 İsmail Çendik
