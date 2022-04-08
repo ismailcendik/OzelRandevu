@@ -350,17 +350,17 @@
                         success: function (response) {
                             if (response == "200") {
                                 $('#saveModal').modal('hide');
-                                alert("Randevu ekle-güncelle başarılı.");
+                                alertify.success("Randevunuz başarıyla eklendi.");
 
                             }
                             else {
                                 $('#saveModal').modal('hide');
-                                alert("Randevu ekle-güncelleme işlemi hatalı.");
+                                alertify.warning("Randevunu eklenirken bir hata oluştu.");
                             }
                         },
                         error: function () {
                             $('#saveModal').modal('hide');
-                            alert("İşlem gerçekleşmedi.");
+                            alertify.error("İşlem gerçekleşmedi.");
 
                         }
 
