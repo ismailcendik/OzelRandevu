@@ -42,7 +42,7 @@ namespace OzelRandevu.Controllers
         }
 
 
-        public JsonResult GetRandevu(string userId="" )
+        public JsonResult GetRandevuByDoktor(string userId="" )
         {
             var model = _context.OzelRandevular.Where(x=>x.UserId==userId)        
                 .Include(x => x.User).Select(x => new RandevuViewModel()
