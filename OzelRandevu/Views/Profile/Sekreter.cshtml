@@ -103,7 +103,6 @@
         <select id='time-zone-selector'>
             <option value='Europe/Istanbul' selected>Europe/Istanbul</option>
         </select>
-
     </div>
 </div>
 <br />
@@ -179,6 +178,7 @@
                 var localeSelectorEl = document.getElementById('locale-selector');
                 var calendarEl = document.getElementById('calendar');
                 var selectedEvent = null;
+                var events=[];
 
 
 
@@ -318,6 +318,7 @@
                 });
 
                 calendar.render();
+                getRandevular();
 
                 $('#datetimepicker1', '#datetimepicker2').datetimepicker({
                     format :'DD/MM/YYYY HH:mm'
@@ -325,9 +326,42 @@
 
 
                 });
-                
+
+
+                function getRandevular() {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/Randevu/GetRandevu',
+                        success: function (response) {
+                            for (var i = 0; i < response.length; i++) {
+                                events.push({
+                                    id: response[i].id,
+                                    title: response[i].doktor,
+                                    hastaAdi: response[i].hastaAdi,
+                                    hastaSoyadi: response[i].hastaSoyadi,
+                                    baslangic: response[i].baslangicTarihi,
+                                    bitis: response[i].bitisTarihi,
+                                    aciklama: response[i].aciklama,
+                                    renk: response[i].renk,
+                                    userId: response[i].userId
+                                });
+                            }
+                            calendar.addEventSource(events);
+                        },
+                        error: function () {
+                            $('#saveModal').modal('hide');
+                            alertify.error("İşlem gerçekleşmedi.");
+
+                        }
+
+                    });
+
+                }
+
+               
 
                 function openEkleGuncelleModal() {
+                
 
                     if (selectedEvent != null) {
                         $('#inputBaslangicTarihi').val(selectedEvent.baslangic.format('DD/MM/YYYY HH:mm'));
@@ -368,7 +402,22 @@
                 }
 
                 $('#btnKaydet').click(function () {
+                  //Basit Validasyon işlemleri
 
+                    if ($('#inputHastaAdi').val() === "") {
+
+                        alertify.warning("Hasta adı boş geçilemez.");
+
+                        return;
+                    }
+                    if ($('#inputHastaSoyadi').val() === "") {
+
+                        alertify("Hasta soyadı boş geçilemez");
+
+                        return;
+
+
+                    }
                     var randevu = {
                         Id: $('#randevuId').val(),
                         UserId: $('#selectdoktorId').val(),

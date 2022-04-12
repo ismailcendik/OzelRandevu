@@ -26,11 +26,14 @@ namespace OzelRandevu.Controllers
             var model = _context.OzelRandevular        /* sorgulamaya gore randevuları tekrar listeleyebiliriz*/
                 .Include(x=>x.User).Select(x=>new RandevuViewModel()
                     { 
+                        Id=x.Id,
                         Doktor = x.User.Ad + " " + x.User.Soyad,
-                        Hasta = x.HastaAdi + " "+ x.HastaSoyadi,
+                        HastaAdi = x.HastaAdi,
+                        HastaSoyadi=x.HastaSoyadi,
                         BaslangicTarihi = x.BaslangicTarihi,
                         BitisTarihi=x.BitisTarihi,
                         Aciklama=x.Aciklama,
+                        Renk =x.User.Renk,
                         UserId = x.UserId
 
             
@@ -44,11 +47,14 @@ namespace OzelRandevu.Controllers
             var model = _context.OzelRandevular.Where(x=>x.UserId==userId)        
                 .Include(x => x.User).Select(x => new RandevuViewModel()
                 {
+                    Id=x.Id,
                     Doktor = x.User.Ad + " " + x.User.Soyad,
-                    Hasta = x.HastaAdi + " " + x.HastaSoyadi,
+                    HastaAdi = x.HastaAdi,
+                    HastaSoyadi=x.HastaSoyadi,
                     BaslangicTarihi = x.BaslangicTarihi,
                     BitisTarihi = x.BitisTarihi,
                     Aciklama = x.Aciklama,
+                    Renk=x.User.Renk,
                     UserId = x.UserId
 
 
